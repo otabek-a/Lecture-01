@@ -23,29 +23,16 @@ snake_coord[0] = {
     x: 9*BOX,
     y: 10*BOX
 }
-snake_coord[1] = {
-    x: 8*BOX,
-    y: 10*BOX
-}
-snake_coord[2] = {
-    x: 8*BOX,
-    y: 11*BOX
-}
-snake_coord[3] = {
-    x: 8*BOX,
-    y: 12*BOX
-}
-snake_coord[4] = {
-    x: 7*BOX,
-    y: 12*BOX
-}
 
 let snakeX = snakeY = 0;
 let newHead;
 let dir = "";
 
 document.addEventListener("keypress", (e) => {
-    if(e.key === "w") dir = "up";
+    if(e.key === "w" && dir != "down") dir = "up";
+    if(e.key === "s" && dir != "up") dir = "down";
+    if(e.key === "a" && dir != "right") dir = "left";
+    if(e.key === "d" && dir != "left") dir = "right";
 });
 
 function myGame(){
@@ -64,6 +51,13 @@ function myGame(){
     if (dir === "left") snakeX -= BOX;
     if (dir === "up") snakeY -= BOX;
     if (dir === "down") snakeY += BOX;
+
+    if(snakeX === food_coord.x && snakeY === food_coord.y){
+        food_coord = {
+            x: BOX * (Math.floor(17 * Math.random()) + 1),
+            y: BOX * (Math.floor(15 * Math.random()) + 3)
+        }
+    }
 
     snake_coord.pop();
 
