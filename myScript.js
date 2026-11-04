@@ -27,6 +27,7 @@ snake_coord[0] = {
 let snakeX = snakeY = 0;
 let newHead;
 let dir = "";
+let score = 0;
 
 document.addEventListener("keypress", (e) => {
     if(e.key === "w" && dir != "down") dir = "up";
@@ -38,6 +39,10 @@ document.addEventListener("keypress", (e) => {
 function myGame(){
     ctx.drawImage(myBackground, 0, 0);
     ctx.drawImage(myFood, food_coord.x, food_coord.y);
+
+    ctx.fillStyle = "white";
+    ctx.font = "50px Arial";
+    ctx.fillText("Score: " + score, 6*BOX, 2*BOX);
 
     ctx.fillStyle = "rgba(109, 16, 216, 1)";
     for(let i = 0; i < snake_coord.length; i++){
@@ -57,9 +62,15 @@ function myGame(){
             x: BOX * (Math.floor(17 * Math.random()) + 1),
             y: BOX * (Math.floor(15 * Math.random()) + 3)
         }
+        score++;
+    } else {
+        snake_coord.pop();
     }
 
-    snake_coord.pop();
+    if(snakeX < 1*BOX || snakeX > 17*BOX || snakeY > 17*BOX || snakeY < 3*BOX){
+        clearInterval(game);
+        console.log("Game Over!!!");
+    }
 
     newHead = {
         x: snakeX,
