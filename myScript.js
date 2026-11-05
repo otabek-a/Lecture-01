@@ -6,6 +6,8 @@ const BOX = 32;
 let music = new Audio("mixkit-winning-a-coin-video-game-2069.wav");
 music.loop = true;
 
+let music_loose = new Audio("mixkit-sad-game-over-trombone-471.wav");
+music_loose.loop = true;
 let myCanvas = document.getElementById("myCanvas");
 let ctx = myCanvas.getContext("2d");
 
@@ -121,6 +123,9 @@ function myGame(){
         ctx.fillStyle = "red";
         ctx.font = "bold 50px 'Times New Roman'"
         ctx.fillText("Game is over", 5 * BOX, 10.6 * BOX);
+        music.currentTime = 0;
+        music_loose.play();
+        music_loose.loop = false;
     }
    
 
