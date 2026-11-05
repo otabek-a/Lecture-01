@@ -3,6 +3,8 @@ myH1.innerHTML = "";
 document.body.append(myH1);
 
 const BOX = 32;
+let music = new Audio("mixkit-winning-a-coin-video-game-2069.wav");
+music.loop = true;
 
 let myCanvas = document.getElementById("myCanvas");
 let ctx = myCanvas.getContext("2d");
@@ -104,6 +106,10 @@ function myGame(){
             y: BOX * (Math.floor(15 * Math.random()) + 3)
         }
         score++;
+        music.currentTime = 0;
+        music.play();
+        music.loop = false;
+        changeFood();
         changeFood()
         
     } else {
